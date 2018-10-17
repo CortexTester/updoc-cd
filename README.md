@@ -75,3 +75,8 @@ Create slave1 VM
 6. sudo systemctl enable jenkins
 7. sudo systemctl start jenkins
 8. install git 
+
+Create WebHook from github
+1. get jenkins IP
+2. login github and select repository
+3. create webhook 
