@@ -13,7 +13,12 @@ Create VM
 5. partition, format and mount 
     to find folder size --> df -hT
     to find attached new disk, it should only sdX, but without number sdX1, sdX2 --> dmesg | grep sd
-    to partition, format and mount to ~/jenkins-data --> fdisk /dev/sdX ---follw https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+    to partition, format and mount to ~/jenkins-data 
+            --> fdisk /dev/sdX 
+            --> sudo mkfs -t ext4 /dev/sdcX1
+
+            ---follw https://docs.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal
+    to set ownership sudo chown tester:tester ~/jenkins-data
 6. install docker 
     a. curl -sSL https://get.docker.com/ | sh
     b. sudo usermod -aG docker tester
@@ -22,8 +27,7 @@ Create VM
     e. --sudo systemctl disable firewalld
     e. --sudo systemctl stop firewalld
     e. mkdir ~/jenkins-data
-    f. cd ~/jenkins-data
-    h. sudo chown tester:tester ~/jenkins-data
+    f. cd ~/jenkins-data    
     h. sudo docker pull jenkins/jenkins:lts
     g. sudo docker run -d --name jenkins -p 80:8080 -p 50000:50000 -v $(pwd):/var/jenkins_home --restart always jenkins/jenkins:lts
 7. setup jenkins
@@ -70,3 +74,4 @@ Create slave1 VM
         WantedBy=multi-user.target
 6. sudo systemctl enable jenkins
 7. sudo systemctl start jenkins
+8. install git 
